@@ -20,6 +20,7 @@ import * as $LemonDrop from "./islands/LemonDrop.tsx";
 import * as $SearchButton from "./islands/SearchButton.tsx";
 import * as $TableOfContents from "./islands/TableOfContents.tsx";
 import * as $VersionSelect from "./islands/VersionSelect.tsx";
+import * as $stories_Counter_story from "./islands/stories/Counter.story.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -44,6 +45,7 @@ const manifest = {
     "./islands/SearchButton.tsx": $SearchButton,
     "./islands/TableOfContents.tsx": $TableOfContents,
     "./islands/VersionSelect.tsx": $VersionSelect,
+    "./islands/stories/Counter.story.tsx": $stories_Counter_story,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
