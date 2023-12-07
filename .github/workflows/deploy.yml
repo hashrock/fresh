@@ -33,3 +33,5 @@ jobs:
           project: "hr-fresh-stories" # 📝 Update the deploy project name if necessary
           entrypoint: "./www/main.ts" # 📝 Update the entrypoint if necessary
           root: "."
+          exclude: node_modules
+
