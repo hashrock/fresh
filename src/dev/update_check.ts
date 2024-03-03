@@ -1,4 +1,4 @@
-import { colors, join, lt, semverParse } from "./deps.ts";
+import { colors, join, lessThan, semverParse } from "./deps.ts";
 
 export interface CheckFile {
   last_checked: string;
@@ -48,7 +48,7 @@ async function fetchLatestVersion() {
 
 async function readCurrentVersion() {
   const versions = (await import("../../versions.json", {
-    "assert": { type: "json" },
+    with: { type: "json" },
   })).default as string[];
   return versions[0];
 }
@@ -118,7 +118,7 @@ export async function updateCheck(
   if (
     (!checkFile.last_shown ||
       Date.now() >= new Date(checkFile.last_shown).getTime() + interval) &&
-    lt(currentVersion, latestVersion)
+    lessThan(currentVersion, latestVersion)
   ) {
     checkFile.last_shown = new Date().toISOString();
 

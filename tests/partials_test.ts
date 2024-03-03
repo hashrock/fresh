@@ -1033,6 +1033,9 @@ Deno.test("submit form GET", async () => {
       const url = await page.$eval(".url", (el) => el.textContent);
       assertEquals(url, `${address}/form_get?name=foobar&fresh-partial=true`);
 
+      const pageUrl = page.url();
+      assertEquals(pageUrl, `${address}/form_get?name=foobar`);
+
       // Server can update form value
       const value = await page.$eval("input", (el) => el.value);
       assertEquals(value, "foobar_foo");
@@ -1201,7 +1204,7 @@ Deno.test("fragment navigation should not scroll to top", async () => {
       await page.click("a");
       await page.waitForFunction(() => location.hash === "#foo");
 
-      const scroll = await page.evaluate(() => window.scrollY);
+      const scroll = await page.evaluate(() => globalThis.scrollY);
       assert(scroll > 0, `Did not scroll to fragment`);
     },
   );
@@ -1329,12 +1332,12 @@ Deno.test("merges <head> content", async () => {
       assertMetaContent(doc, "og:bar", "og value bar");
 
       const color = await page.$eval("h1", (el) => {
-        return window.getComputedStyle(el).color;
+        return globalThis.getComputedStyle(el).color;
       });
       assertEquals(color, "rgb(255, 0, 0)");
 
       const textColor = await page.$eval("p", (el) => {
-        return window.getComputedStyle(el).color;
+        return globalThis.getComputedStyle(el).color;
       });
       assertEquals(textColor, "rgb(0, 128, 0)");
     },
@@ -1532,6 +1535,57 @@ Deno.test("render 404 partial", async () => {
 
       await page.click(".update-link");
       await page.waitForSelector(".status-404");
+    },
+  );
+});
+
+Deno.test("render partial with title", async () => {
+  await withPageName(
+    "./tests/fixture_partials/main.ts",
+    async (page, address) => {
+      await page.goto(`${address}/head_merge`);
+      await page.waitForSelector(".status-initial");
+
+      await page.click(".duplicate-link");
+      await page.waitForSelector(".status-duplicated");
+
+      const doc = parseHtml(await page.content());
+      assertEquals(doc.title, "Head merge duplicated");
+    },
+  );
+});
+
+Deno.test("render partial without title", async () => {
+  await withPageName(
+    "./tests/fixture_partials/main.ts",
+    async (page, address) => {
+      await page.goto(`${address}/head_merge`);
+      await page.click(".without-title");
+
+      await page.waitForSelector(".page-without-title");
+
+      const doc = parseHtml(await page.content());
+      assertEquals(doc.title, "Head merge");
+    },
+  );
+});
+
+// See https://github.com/denoland/fresh/issues/2254
+Deno.test("should not be able to override __FRSH_STATE", async () => {
+  await withPageName(
+    "./tests/fixture_partials/main.ts",
+    async (page, address) => {
+      let didError = false;
+      page.on("pageerror", (ev) => {
+        didError = true;
+        console.log(ev);
+      });
+      await page.goto(`${address}/spoof_state`);
+
+      await page.click("a");
+      await page.waitForSelector(".raw_ready");
+
+      assert(!didError);
     },
   );
 });

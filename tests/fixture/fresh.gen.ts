@@ -35,6 +35,7 @@ import * as $i18n_lang_lang from "./routes/i18n/[[lang]]/lang.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $intercept from "./routes/intercept.tsx";
 import * as $intercept_args from "./routes/intercept_args.tsx";
+import * as $island_json from "./routes/island_json.tsx";
 import * as $islands_index from "./routes/islands/index.tsx";
 import * as $islands_multiple_island_exports from "./routes/islands/multiple_island_exports.tsx";
 import * as $islands_returning_null from "./routes/islands/returning_null.tsx";
@@ -73,6 +74,7 @@ import * as $route_groups_bar_boof_index from "./routes/route-groups/(bar)/boof/
 import * as $route_groups_foo_layout from "./routes/route-groups/(foo)/_layout.tsx";
 import * as $route_groups_foo_index from "./routes/route-groups/(foo)/index.tsx";
 import * as $signal_shared from "./routes/signal_shared.tsx";
+import * as $spoof_state from "./routes/spoof_state.tsx";
 import * as $state_in_props_middleware from "./routes/state-in-props/_middleware.ts";
 import * as $state_in_props_index from "./routes/state-in-props/index.tsx";
 import * as $state_middleware_middleware from "./routes/state-middleware/_middleware.ts";
@@ -84,10 +86,12 @@ import * as $std from "./routes/std.tsx";
 import * as $umlaut_äöüß from "./routes/umlaut-äöüß.tsx";
 import * as $wildcard from "./routes/wildcard.tsx";
 import * as $Counter from "./islands/Counter.tsx";
+import * as $DangerousIsland from "./islands/DangerousIsland.tsx";
 import * as $Foo_Bar from "./islands/Foo.Bar.tsx";
 import * as $FormIsland from "./islands/FormIsland.tsx";
 import * as $Greeter from "./islands/Greeter.tsx";
 import * as $HookIsland from "./islands/HookIsland.tsx";
+import * as $JsonIsland from "./islands/JsonIsland.tsx";
 import * as $MultipleCounters from "./islands/MultipleCounters.tsx";
 import * as $ReturningNull from "./islands/ReturningNull.tsx";
 import * as $RootFragment from "./islands/RootFragment.tsx";
@@ -139,6 +143,7 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/intercept.tsx": $intercept,
     "./routes/intercept_args.tsx": $intercept_args,
+    "./routes/island_json.tsx": $island_json,
     "./routes/islands/index.tsx": $islands_index,
     "./routes/islands/multiple_island_exports.tsx":
       $islands_multiple_island_exports,
@@ -191,6 +196,7 @@ const manifest = {
     "./routes/route-groups/(foo)/_layout.tsx": $route_groups_foo_layout,
     "./routes/route-groups/(foo)/index.tsx": $route_groups_foo_index,
     "./routes/signal_shared.tsx": $signal_shared,
+    "./routes/spoof_state.tsx": $spoof_state,
     "./routes/state-in-props/_middleware.ts": $state_in_props_middleware,
     "./routes/state-in-props/index.tsx": $state_in_props_index,
     "./routes/state-middleware/_middleware.ts": $state_middleware_middleware,
@@ -205,10 +211,12 @@ const manifest = {
   },
   islands: {
     "./islands/Counter.tsx": $Counter,
+    "./islands/DangerousIsland.tsx": $DangerousIsland,
     "./islands/Foo.Bar.tsx": $Foo_Bar,
     "./islands/FormIsland.tsx": $FormIsland,
     "./islands/Greeter.tsx": $Greeter,
     "./islands/HookIsland.tsx": $HookIsland,
+    "./islands/JsonIsland.tsx": $JsonIsland,
     "./islands/MultipleCounters.tsx": $MultipleCounters,
     "./islands/ReturningNull.tsx": $ReturningNull,
     "./islands/RootFragment.tsx": $RootFragment,
